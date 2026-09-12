@@ -6,7 +6,6 @@ import { CTA } from '../components/CTA.jsx'
 import { sendToSysteme } from '../components/useSysteme.js'
 
 export default function Contacto() {
-  const [budget, setBudget] = React.useState("")
   const [services, setServices] = React.useState([])
   const [sent, setSent] = React.useState(false)
   const [loading, setLoading] = React.useState(false)
@@ -15,17 +14,23 @@ export default function Contacto() {
   const toggle = s => setServices(cur => cur.includes(s) ? cur.filter(x=>x!==s) : [...cur,s])
   const update = (k,v) => setFormData(f => ({...f,[k]:v}))
 
-  const submit = async (e) => {
-    e.preventDefault()
-    setLoading(true)
-    await sendToSysteme({
-      email: formData.email,
-      firstName: formData.nombre,
-      tags: ["contacto-web-nebula-2026", ...services.map(s=>`interes-${s.toLowerCase().replace(/\s+/g,'-')}`)]
-    })
-    setSent(true)
-    setLoading(false)
-  }
+const submit = async (e) => {
+  e.preventDefault()
+  setLoading(true)
+  await sendToSysteme({
+    email: formData.email,
+    firstName: formData.nombre,
+    tags: ["contacto-web-nebula-2026", ...services.map(s=>`interes-${s.toLowerCase().replace(/\s+/g,'-')}`)],
+    empresa: formData.empresa,
+    telefono: formData.telefono,
+    proyecto: formData.proyecto,
+    budget: budget,
+    servicios: services,
+    fuente: formData.fuente,
+  })
+  setSent(true)
+  setLoading(false)
+}
 
   return (
     <PageShell>
@@ -52,14 +57,6 @@ export default function Contacto() {
                 <div className="budget-chips">
                   {["Branding","Web","Redes","Google Ads","Meta Ads","SEO","Diagnóstico 360°"].map(s => (
                     <button type="button" key={s} className={`budget-chip ${services.includes(s)?"on":""}`} onClick={()=>toggle(s)}>{s}</button>
-                  ))}
-                </div>
-              </div>
-              <div className="field">
-                <label>Presupuesto estimado (MXN)</label>
-                <div className="budget-chips">
-                  {["< 50k","50–150k","150–400k","400k–1M","+1M","Por definir"].map(b => (
-                    <button type="button" key={b} className={`budget-chip ${budget===b?"on":""}`} onClick={()=>setBudget(b)}>{b}</button>
                   ))}
                 </div>
               </div>

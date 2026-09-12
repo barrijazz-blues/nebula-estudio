@@ -1,4 +1,5 @@
 import React from 'react'
+import { sendToSysteme } from '../components/useSysteme.js'
 import { Arrow, ServiceIcon } from '../components/atoms.jsx'
 
 const WA_LINK = "https://wa.link/qedt1r"
@@ -50,8 +51,20 @@ export default function Landing() {
   const [sent, setSent] = React.useState(false)
   const [form, setForm] = React.useState({ nombre:"", apellido:"", email:"", mensaje:"" })
   const update = (k,v) => setForm(f => ({...f,[k]:v}))
-  const submit = (e) => { e.preventDefault(); setSent(true) }
-
+const [loading, setLoading] = React.useState(false)
+const submit = async (e) => {
+  e.preventDefault()
+  setLoading(true)
+  await sendToSysteme({
+    email: form.email,
+    firstName: form.nombre,
+    tags: ["landing-nebula-2026"],
+    proyecto: form.mensaje,
+    fuente: "Landing campaña",
+  })
+  setSent(true)
+  setLoading(false)
+}
   return (
     <div style={{ fontFamily:"var(--f-sans)", color:"var(--ink)", background:"var(--bg)" }}>
 
@@ -225,9 +238,9 @@ export default function Landing() {
               <label style={{ fontFamily:"var(--f-mono)", fontSize:10, letterSpacing:".12em", textTransform:"uppercase", color:"oklch(0.55 0.01 280)" }}>Mensaje *</label>
               <textarea placeholder="Cuéntanos de tu proyecto..." value={form.mensaje} onChange={e=>update('mensaje',e.target.value)} required rows={4} style={{ background:"oklch(0.2 0.01 280)", border:"1px solid oklch(0.35 0.01 280)", borderRadius:8, padding:"12px 16px", color:"var(--bg)", fontSize:15, outline:"none", fontFamily:"var(--f-sans)", resize:"vertical" }} />
             </div>
-            <button type="submit" className="btn btn--accent" style={{ justifyContent:"center", textAlign:"center", fontSize:16, height:52 }}>
-              {sent ? "Mensaje enviado ✓" : "Enviar mensaje"} {!sent && <span className="arrow"><Arrow size={12} rot={-45} /></span>}
-            </button>
+           <button type="submit" className="btn btn--accent" disabled={loading} style={{ justifyContent:"center", textAlign:"center", fontSize:16, height:52 }}>
+  {sent ? "Mensaje enviado ✓" : loading ? "Enviando..." : "Enviar mensaje"} {!sent && !loading && <span className="arrow"><Arrow size={12} rot={-45} /></span>}
+</button>
           </form>
         </div>
       </section>

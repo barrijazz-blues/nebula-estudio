@@ -56,51 +56,85 @@ export function NavBar() {
 
   React.useEffect(() => { setMenuOpen(false) }, [location])
 
-  // Prevent body scroll when menu is open
   React.useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
+    document.body.style.overflow = menuOpen ? "hidden" : ""
+    return () => { document.body.style.overflow = "" }
   }, [menuOpen])
 
   const isActive = (path) => location.pathname === path
 
-  return (
-    <nav className={`nav ${scrolled ? "scrolled" : ""}`} style={{ position: 'sticky', top: 0, zIndex: 200 }}>
-      <div className="container nav-inner">
-        <Link to="/" className="brand" onClick={() => setMenuOpen(false)}>
-          <img src="/logo.png" alt="Nebula Estudio" style={{ height: 52, width: 'auto' }} />
-        </Link>
+  const LINKS = [
+    { to: "/servicios", label: "Servicios" },
+    { to: "/trabajo",   label: "Trabajo" },
+    { to: "/estudio",   label: "Estudio" },
+    { to: "/blog",      label: "Blog" },
+    { to: "/precios",   label: "Precios" },
+    { to: "/contacto",  label: "Contacto" },
+  ]
 
-        <div className={`nav-links ${menuOpen ? "open" : ""}`}>
-          <Link to="/servicios" className={isActive("/servicios") ? "active" : ""} onClick={() => setMenuOpen(false)}>Servicios</Link>
-          <Link to="/trabajo"   className={isActive("/trabajo")   ? "active" : ""} onClick={() => setMenuOpen(false)}>Trabajo</Link>
-          <Link to="/estudio"   className={isActive("/estudio")   ? "active" : ""} onClick={() => setMenuOpen(false)}>Estudio</Link>
-          <Link to="/blog"      className={isActive("/blog")      ? "active" : ""} onClick={() => setMenuOpen(false)}>Blog</Link>
-          <Link to="/precios"   className={isActive("/precios")   ? "active" : ""} onClick={() => setMenuOpen(false)}>Precios</Link>
-          <Link to="/contacto"  className={isActive("/contacto")  ? "active" : ""} onClick={() => setMenuOpen(false)}>Contacto</Link>
-          {menuOpen && (
-            <a href="https://wa.link/uewxbw" target="_blank" rel="noopener" className="btn btn--accent" style={{ marginTop: 16 }}>
-              WhatsApp <span className="arrow"><Arrow size={10} rot={-45} /></span>
-            </a>
-          )}
+  return (
+    <>
+      <nav className={`nav ${scrolled ? "scrolled" : ""}`}>
+        <div className="container nav-inner">
+          <Link to="/" className="brand" onClick={() => setMenuOpen(false)}>
+            <img src="/logo.png" alt="Nebula Estudio" style={{ height: 52, width: "auto" }} />
+          </Link>
+
+          <div className="nav-links">
+            {LINKS.map(l => (
+              <Link key={l.to} to={l.to} className={isActive(l.to) ? "active" : ""}>{l.label}</Link>
+            ))}
+          </div>
+
+          <div className="nav-actions">
+            <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
+              {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+            </button>
+            <Link to="/contacto" className="btn btn--accent nav-cta" style={{ height: 40, fontSize: 13 }}>
+              Hablemos <span className="arrow"><Arrow size={10} rot={-45} /></span>
+            </Link>
+            <button className="nav-hamburger" onClick={() => setMenuOpen(o => !o)} aria-label="Abrir menú">
+              <span /><span /><span />
+            </button>
+          </div>
         </div>
 
-        <div className="nav-actions" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
-            {theme === "dark" ? <SunIcon /> : <MoonIcon />}
-          </button>
-          <Link to="/contacto" className="btn btn--accent" style={{ height: 40, fontSize: 13 }}>
-            Hablemos
-            <span className="arrow"><Arrow size={10} rot={-45} /></span>
+        {/* Accent line under nav */}
+        <div className="nav-accent-bar" />
+      </nav>
+
+      <div className={`mobile-overlay ${menuOpen ? "open" : ""}`}>
+        <div className="mobile-overlay-glow" />
+        <div className="mobile-overlay-top">
+          <Link to="/" className="mobile-overlay-logo" onClick={() => setMenuOpen(false)}>
+            <img src="/logo.png" alt="Nebula Estudio" style={{ height: 40, width: "auto", filter: "brightness(0) invert(1)" }} />
           </Link>
-          <button className="nav-hamburger" onClick={() => setMenuOpen(o => !o)} aria-label="Menu">
-            <span style={{ transform: menuOpen ? 'rotate(45deg) translate(4px, 4px)' : 'none' }} />
-            <span style={{ opacity: menuOpen ? 0 : 1 }} />
-            <span style={{ transform: menuOpen ? 'rotate(-45deg) translate(4px, -4px)' : 'none' }} />
-          </button>
+          <button className="mobile-overlay-close" onClick={() => setMenuOpen(false)} aria-label="Cerrar menú">×</button>
+        </div>
+        <nav className="mobile-overlay-links">
+          {LINKS.map((l, i) => (
+            <Link
+              key={l.to}
+              to={l.to}
+              className={`mobile-overlay-link ${isActive(l.to) ? "active" : ""}`}
+              onClick={() => setMenuOpen(false)}
+              style={{ animationDelay: `${i * 0.06}s` }}
+            >
+              <span className="mobile-overlay-link-num">0{i + 1}</span>
+              {l.label}
+              <span className="mobile-overlay-link-arrow">↗</span>
+            </Link>
+          ))}
+        </nav>
+        <div className="mobile-overlay-bottom">
+          <a href="https://wa.link/uewxbw" target="_blank" rel="noopener" className="mobile-overlay-wa">
+            WhatsApp directo
+            <span>↗</span>
+          </a>
+          <div className="mobile-overlay-tag">Nebula · Estudio ⚡</div>
         </div>
       </div>
-    </nav>
+    </>
   )
 }
 
@@ -133,7 +167,7 @@ export function Footer() {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand">
-            <Link to="/"><img src="/logo.png" alt="Nebula Estudio" style={{ height: 56, width: 'auto' }} /></Link>
+            <Link to="/"><img src="/logo.png" alt="Nebula Estudio" style={{ height: 56, width: "auto" }} /></Link>
             <p>Atendemos a toda la República Mexicana. Sedes en Monterrey, Quintana Roo y Baja California. Somos espaciales ⚡</p>
           </div>
           <div className="footer-col">
@@ -166,9 +200,9 @@ export function Footer() {
         <div className="footer-bottom">
           <span>© 2026 Nebula Estudio.</span>
           <div className="links">
-            <a href="#">Privacidad</a>
-            <a href="#">Términos</a>
-            <a href="#">Cookies</a>
+            <Link to="/privacidad">Privacidad</Link>
+            <Link to="/terminos">Términos</Link>
+            <Link to="/cookies">Cookies</Link>
           </div>
         </div>
       </div>

@@ -4,12 +4,12 @@ import { CTA } from '../components/CTA.jsx'
 import ImageSlot from '../components/ImageSlot.jsx'
 
 const WORK = [
-  { slug:"wakax",      title:"Wakax",             tag:"Hotel · Tulum",        year:"2024", filters:["branding","web"],    span:8, ar:"16/10", img:"/trabajo-wakax.jpg" },
+  { slug:"nevana", title:"Nevana Tulum", tag:"Hotel · Tulum", year:"2026", filters:["branding","web"], span:8, ar:"16/10", img:"/trabajo-nevana.jpg" },
   { slug:"pocna",      title:"Pocna Tulum",        tag:"Hotel · Tulum",        year:"2024", filters:["web"],               span:4, ar:"4/5",   img:"/trabajo-pocna.png" },
   { slug:"yucannabis", title:"Yucannabis",          tag:"CBD · Quintana Roo",   year:"2024", filters:["branding"],          span:4, ar:"4/5",   img:"/trabajo-yucannabis.png" },
   { slug:"fs-brokers", title:"FS Brokers",          tag:"Inmobiliaria · SPGG",  year:"2024", filters:["branding","web"],    span:8, ar:"16/10", img:"/trabajo-fs-brookers.png" },
   { slug:"ilaria",     title:"Ilaria Lisi",         tag:"Wellness · Tulum",     year:"2024", filters:["branding"],          span:6, ar:"4/3",   img:"/trabajo-ilaria.png" },
-  { slug:"pacific",    title:"Pacific Best Berry",  tag:"Distribución · BC",    year:"2024", filters:["web","performance"], span:6, ar:"4/3",   img:"/trabajo-pacific.jpg" },
+  { slug:"pacific",    title:"Pacific Best Berry",  tag:"Distribución · BC",    year:"2024", filters:["web","performance"], span:6, ar:"4/3",   img:"/trabajo-pacific.png" },
   { slug:"eatbar",     title:"EatBar",              tag:"Restaurante · MTY",    year:"2023", filters:["branding","social"], span:4, ar:"4/5",   img:"/trabajo-eatbar.jpg" },
   { slug:"italdo",     title:"Italdo",              tag:"Restaurante",           year:"2023", filters:["branding"],          span:4, ar:"4/5",   img:"/trabajo-italdo-social-media.jpg" },
   { slug:"chicken",    title:"Creepy Chicken",      tag:"Restaurante · MTY",    year:"2023", filters:["branding","social"], span:4, ar:"4/5",   img:"/trabajo-creepy-chicken.png" },

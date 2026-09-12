@@ -34,73 +34,70 @@ const PROBLEMS = [
 ]
 
 const SERVICES = [
-  { num:"01", kind:"strategy",    title:"Diagnóstico 360°",  desc:"Auditoría completa de marca, canales, datos y stack.",          tags:["Auditoría","Data review","Stack"] },
+  { num:"01", kind:"strategy",    title:"Diagnóstico 360°",  desc:"Auditoría completa de marca, canales, datos y herramientas.", tags:["Auditoría","Data review","Estrategia"] },
   { num:"02", kind:"branding",    title:"Branding & Diseño", desc:"Identidad, sistemas visuales y materiales que aguantan el escrutinio.", tags:["Identidad","Sistema","Print"] },
-  { num:"03", kind:"web",         title:"Páginas web",       desc:"Sitios y landings que cargan rápido, posicionan y convierten.", tags:["Diseño","Desarrollo","CRO"] },
-  { num:"04", kind:"social",      title:"Redes sociales",    desc:"Estrategia de contenido, producción y community management.",   tags:["Estrategia","Producción","Community"] },
-  { num:"05", kind:"performance", title:"Google Ads & Meta", desc:"Campañas pagadas con foco en LTV y CAC, no en clicks vacíos.", tags:["Google Ads","Meta","Reporting"] },
-  { num:"06", kind:"seo",         title:"SEO & Contenido",   desc:"Posicionamiento orgánico que convierte intención en demanda.",  tags:["Technical SEO","Editorial","Topic clusters"] },
+  { num:"03", kind:"web",         title:"Páginas web",       desc:"Sitios y landings que cargan rápido, posicionan y convierten.", tags:["Diseño","Desarrollo","SEO"] },
+  { num:"04", kind:"social",      title:"Redes sociales",    desc:"Estrategia de contenido, producción y community management.", tags:["Estrategia","Producción","Community"] },
+  { num:"05", kind:"performance", title:"Google Ads & Meta", desc:"Publicidad en Google y Meta que trae clientes reales, no solo visitas.", tags:["Google Ads","Meta","Resultados"] },
+  { num:"06", kind:"seo",         title:"SEO & Contenido",   desc:"Posicionamiento orgánico que convierte intención en demanda.", tags:["SEO","Editorial","Contenido"] },
 ]
 
 const VERTICALS = [
-  { name:"Hoteles & Hospitality",   count:"12 marcas", icon:"hotel" },
-  { name:"Restaurantes & Bares",    count:"9 marcas",  icon:"rest"  },
-  { name:"Inmobiliarias",           count:"7 marcas",  icon:"home"  },
-  { name:"Wellness & CBD",          count:"5 marcas",  icon:"leaf"  },
-  { name:"Retail & E-commerce",     count:"11 marcas", icon:"bag"   },
-  { name:"Distribución & B2B",      count:"6 marcas",  icon:"box"   },
-  { name:"Servicios profesionales",  count:"8 marcas", icon:"brief" },
-  { name:"Turismo & Experiencias",  count:"10 marcas", icon:"comp"  },
+  { name:"Hoteles & Hospitality",  count:"12 marcas", icon:"hotel" },
+  { name:"Restaurantes & Bares",   count:"9 marcas",  icon:"rest"  },
+  { name:"Inmobiliarias",          count:"7 marcas",  icon:"home"  },
+  { name:"Wellness & CBD",         count:"5 marcas",  icon:"leaf"  },
+  { name:"Retail & E-commerce",    count:"11 marcas", icon:"bag"   },
+  { name:"Distribución & B2B",     count:"6 marcas",  icon:"box"   },
+  { name:"Servicios profesionales", count:"8 marcas", icon:"brief" },
+  { name:"Turismo & Experiencias", count:"10 marcas", icon:"comp"  },
 ]
 
 const CASES = [
-  { tag:"Hotel · Tulum",       year:"2024", title:"Pocna Tulum",        desc:"Desarrollo y diseño web del hotel.", img:"/all-devices-pocna.png", stats:[["Web","Completa"],["Tulum","Hospitality"]] },
-  { tag:"Hotel · Tulum",       year:"2026", title:"Nevana Tulum",        desc:"Desarrollo y diseño web del hotel.", img:"/trabajo-nevana.jpg", stats:[["Web","Completa"],["Tulum","Hospitality"]] },
-  { tag:"CBD · Tulum",         year:"2024", title:"Yucannabis",          desc:"Branding completo para marca de CBD.", img:"/trabajo-yucannabis.png", stats:[["Identidad","Sistema"],["CBD","Vertical"]] },
-  { tag:"Inmobiliaria · SPGG", year:"2024", title:"Alia Offices",        desc:"Logotipo y desarrollo de página web para inmobiliaria.", img:"/trabajo-fs-brookers.png", stats:[["Web","+ Logo"],["SPGG","Real estate"]] },
-  { tag:"Wellness · Tulum",    year:"2024", title:"Ilaria Lisi",         desc:"Identidad de marca con paleta natural.", img:"/trabajo-ilaria.jpg", stats:[["Branding","Moodboard"],["Wellness","Spirit"]] },
-  { tag:"Distribuidora · BC",  year:"2024", title:"Pacific Best Berry",  desc:"Página web responsive para distribuidora en Ensenada.", img:"/trabajo-pacific.jpg", stats:[["Web","Responsive"],["BC","Distribución"]] },
-  { tag:"Restaurante · MTY",   year:"2023", title:"EatBar",              desc:"Branding y social media para restaurante en Monterrey.", img:"/trabajo-eatbar.jpg", stats:[["Branding","Social"],["MTY","F&B"]] },
-  { tag:"Restaurante · MTY",   year:"2023", title:"Italdo",              desc:"Branding para restaurante italiano.", img:"/trabajo-italdo-social-media.jpg", stats:[["Branding","Social"],["MTY","F&B"]] },
-  { tag:"Restaurante · MTY",   year:"2023", title:"Creepy Chicken",      desc:"Branding para restaurante en Monterrey.", img:"/trabajo-creepy-chicken.png", stats:[["Branding","Social"],["MTY","F&B"]] },
-  { tag:"Servicios · MTY",     year:"2023", title:"Lavaggio",            desc:"Branding para empresa de servicios.", img:"/trabajo-lavaggio.jpg", stats:[["Branding","MTY"],["Servicios","MTY"]] },
+  { tag:"Hotel · Tulum",       year:"2024", title:"Pocna Tulum",       desc:"Desarrollo y diseño web del hotel.", img:"/all-devices-pocna.png", stats:[["Web","Completa"],["Tulum","Hospitality"]] },
+  { tag:"Hotel · Tulum",       year:"2026", title:"Nevana Tulum",      desc:"Desarrollo y diseño web del hotel.", img:"/trabajo-nevana.jpg", stats:[["Web","Completa"],["Tulum","Hospitality"]] },
+  { tag:"CBD · Tulum",         year:"2024", title:"Yucannabis",        desc:"Branding completo para marca de CBD.", img:"/trabajo-yucannabis.png", stats:[["Identidad","Sistema"],["CBD","Vertical"]] },
+  { tag:"Inmobiliaria · SPGG", year:"2024", title:"Alia Offices",      desc:"Logotipo y desarrollo de página web para inmobiliaria.", img:"/trabajo-fs-brookers.png", stats:[["Web","+ Logo"],["SPGG","Real estate"]] },
+  { tag:"Wellness · Tulum",    year:"2024", title:"Ilaria Lisi",       desc:"Identidad de marca con paleta natural.", img:"/trabajo-ilaria.jpg", stats:[["Branding","Moodboard"],["Wellness","Spirit"]] },
+  { tag:"Distribuidora · BC",  year:"2024", title:"Pacific Best Berry", desc:"Página web responsive para distribuidora en Ensenada.", img:"/trabajo-pacific.jpg", stats:[["Web","Responsive"],["BC","Distribución"]] },
+  { tag:"Restaurante · MTY",   year:"2023", title:"EatBar",            desc:"Branding y social media para restaurante en Monterrey.", img:"/trabajo-eatbar.jpg", stats:[["Branding","Social"],["MTY","F&B"]] },
+  { tag:"Restaurante · MTY",   year:"2023", title:"Italdo",            desc:"Branding para restaurante italiano.", img:"/trabajo-italdo-social-media.jpg", stats:[["Branding","Social"],["MTY","F&B"]] },
+  { tag:"Restaurante · MTY",   year:"2023", title:"Creepy Chicken",    desc:"Branding para restaurante en Monterrey.", img:"/trabajo-creepy-chicken.png", stats:[["Branding","Social"],["MTY","F&B"]] },
+  { tag:"Servicios · MTY",     year:"2023", title:"Lavaggio",          desc:"Branding para empresa de servicios.", img:"/trabajo-lavaggio.jpg", stats:[["Branding","MTY"],["Servicios","MTY"]] },
 ]
 
 const PROCESS = [
   { n:"01", t:"Diagnóstico",    d:"4 semanas dentro de tu negocio: data, stack, equipo, mercado.", items:["Data audit","Entrevistas","Benchmarks"] },
-  { n:"02", t:"Tesis",          d:"Documento de tesis: dónde está el palanque y por qué.",          items:["Hipótesis","Roadmap","Targets"] },
-  { n:"03", t:"Implementación", d:"Bajamos a ejecución con tu equipo. Sprints quincenales.",         items:["Sprints","Pair-work","Enablement"] },
-  { n:"04", t:"Medición",       d:"Tableros honestos, reviews trimestrales y handover.",             items:["Dashboards","QBRs","Handover"] },
+  { n:"02", t:"Tesis",          d:"Documento de tesis: dónde está el palanque y por qué.", items:["Hipótesis","Roadmap","Targets"] },
+  { n:"03", t:"Implementación", d:"Bajamos a ejecución con tu equipo. Sprints quincenales.", items:["Sprints","Pair-work","Enablement"] },
+  { n:"04", t:"Medición",       d:"Tableros honestos, reviews trimestrales y handover.", items:["Dashboards","Reportes","Handover"] },
 ]
 
 const TABS = {
   web: {
     label: "Página Web",
+    desde: false,
     planes: [
-      { name:"Landing Express", price:"$1,499", period:"único", highlight:false, items:["1 página completa","Diseño responsivo (desktop, tablet y móvil)","Formulario de contacto o botón a WhatsApp","Integración con redes sociales","Entrega en 7 días hábiles"] },
-      { name:"Landing Page",    price:"$4,900", period:"único", highlight:false, items:["Diseño de landing page enfocada a conversión","Diseño responsivo (desktop, tablet y móvil)","Formulario de contacto o botón a WhatsApp","Integración con redes sociales","Optimización básica de velocidad"] },
-      { name:"Web Refresh",     price:"$7,900", period:"único", highlight:true,  items:["Análisis de la página actual","Rediseño visual (look & feel moderno)","Mejora de estructura y navegación (UX)","Diseño responsivo","Actualización de estilos, tipografías y colores","Optimización básica de velocidad","Soporte durante el proceso"] },
-      { name:"Web Informativa", price:"$12,000",period:"único", highlight:false, items:["Diseño web profesional","Hasta 7 secciones","Diseño responsivo","Formulario de contacto","Optimización SEO básica","Integración con Google Maps y redes sociales","Hosting primer año gratis"] },
+      { name:"Órbita",  sub:"Landing Express",   price:"$3,499",  period:"único", highlight:false, items:["1 página completa y bien diseñada","Diseño responsivo (móvil, tablet y desktop)","Formulario de contacto o botón a WhatsApp","Integración con redes sociales","Hosting primer año gratis","Entrega en 7 días hábiles"] },
+      { name:"Satélite", sub:"Sitio Profesional", price:"$7,900",  period:"único", highlight:false, items:["Hasta 5 secciones personalizadas","Diseño responsivo","Formulario de contacto avanzado","SEO básico incluido","Integración con Google Maps","Hosting primer año gratis","Botón de WhatsApp flotante","Entrega en 15 días hábiles"] },
+      { name:"Nebula",  sub:"Sitio Completo",     price:"$14,000", period:"único", highlight:true,  items:["Hasta 15 páginas personalizadas","Diseño responsivo","SEO completo (técnico + on-page)","Blog integrado y listo para publicar","Google Analytics configurado","Velocidad optimizada (Core Web Vitals)","Mapa de calor básico (Hotjar)","Certificado SSL incluido","Hosting primer año gratis","Soporte post-entrega 30 días","Entrega en 21 días hábiles"] },
+      { name:"Cosmos",  sub:"Tienda en línea",    price:"$28,000", period:"único", highlight:false, items:["Todo lo del paquete Nebula","Tienda en línea (hasta 20 productos)","Carrito de compras","Pasarela de pago (Mercado Pago o Stripe)","Panel de administración","Hosting primer año gratis","Capacitación incluida","Soporte post-entrega 60 días","Entrega en 30 días hábiles"] },
     ],
-    note:"Los paquetes no incluyen toma ni edición de fotografías. Copys por parte del cliente. Precios más IVA.",
+    note: "Los paquetes no incluyen toma ni edición de fotografías. Copys por parte del cliente. Precios más IVA.",
   },
   social: {
     label: "Social Media",
-    planes: [
-      { name:"Social Media Básico",           price:"$3,500", period:"mes", highlight:false, items:["8 posts estáticos al mes","Diseño gráfico profesional","Copywriting estratégico optimizado para redes (SEO)","Optimización básica del perfil"] },
-      { name:"Social Media Video",            price:"$5,000", period:"mes", highlight:true,  items:["8 posts estáticos","4 reels / videos cortos al mes (edición profesional)","Desarrollo de guión para reels","Copywriting estratégico optimizado para redes (SEO)","Programación de contenido","Optimización del perfil","Reporte mensual"] },
-      { name:"Social Media + Campañas Meta",  price:"$7,000", period:"mes", highlight:false, items:["Todo lo del Paquete Video","Gestión de campañas en Meta Ads (Facebook e Instagram)","Estrategia para campañas publicitarias","Hasta 3 campañas publicitarias mensuales","Optimización semanal de anuncios","Reporte mensual y medición de resultados"] },
-    ],
-    note:"La inversión en pauta no está incluida. Los paquetes no incluyen toma de fotografía ni producción de video. Precios más IVA.",
+    desde: true,
+    desdePrice: "$3,500",
+    desdeDesc: "Gestión profesional de redes sociales. Posts, reels, copywriting y reportes mensuales.",
+    note: "La inversión en pauta no está incluida. No incluye toma de fotografía ni producción de video. Precios más IVA.",
   },
   campanas: {
     label: "Campañas",
-    planes: [
-      { name:"Meta Ads",    price:"$2,800", period:"mes", highlight:false, items:["Configuración de cuenta publicitaria","Hasta 2 campañas activas por mes","2–3 conjuntos de anuncios por campaña","Diseño gráfico de la publicidad","Segmentación estratégica","Optimización semanal","Reporte mensual y análisis de resultados"] },
-      { name:"Google Ads",  price:"$3,800", period:"mes", highlight:true,  items:["Estrategia para 3 meses","Hasta 3 campañas mensuales (Búsqueda)","Palabras clave y palabras negativas","Análisis de calidad de anuncio","Reporte estratégico mensual (clics, conversiones, CTR, ROI)"] },
-      { name:"Full Traffic",price:"$5,500", period:"mes", highlight:false, items:["Todo lo que incluye Meta Ads","Todo lo que incluye Google Ads","Máxima cobertura digital","Reporte unificado mensual"] },
-    ],
-    note:"La inversión en pauta publicitaria no está incluida en el costo del servicio. Precios más IVA.",
+    desde: true,
+    desdePrice: "$2,800",
+    desdeDesc: "Campañas en Google, Meta o ambas. Segmentación, diseño de anuncios y optimización continua.",
+    note: "La inversión en pauta publicitaria no está incluida. Precios más IVA.",
   },
 }
 
@@ -123,45 +120,68 @@ function PreciosHome() {
 
         <div style={{display:"flex",gap:8,marginBottom:40,flexWrap:"wrap"}} className="reveal">
           {Object.entries(TABS).map(([key,val]) => (
-            <button key={key} className={`work-filter ${tab===key?"active":""}`} onClick={()=>setTab(key)}>
-              {val.label}
-            </button>
+            <button key={key} className={`work-filter ${tab===key?"active":""}`} onClick={()=>setTab(key)}>{val.label}</button>
           ))}
         </div>
 
-        <div className="prices-home-grid reveal">
-          {current.planes.map((plan,i) => (
-            <div key={i} className={`price-card ${plan.highlight?"price-card--highlight":""}`}>
-              {plan.highlight && <div className="price-card-badge">Más popular</div>}
-              <div className="price-card-name">{plan.name}</div>
-              <div className="price-card-amount">
-                {plan.price}
-                <span className="price-card-period">MXN / {plan.period}</span>
+        {current.desde ? (
+          <div style={{border:"1px solid var(--line)",borderRadius:"var(--r-lg)",padding:"clamp(32px,5vw,48px)",background:"var(--bg)",display:"flex",flexDirection:"column",gap:20,maxWidth:560}}>
+            <div>
+              <div style={{fontFamily:"var(--f-mono)",fontSize:10,letterSpacing:".12em",textTransform:"uppercase",color:"var(--accent)",marginBottom:8}}>{current.label}</div>
+              <div style={{display:"flex",alignItems:"baseline",gap:8,marginBottom:12}}>
+                <span style={{fontFamily:"var(--f-display)",fontSize:"clamp(18px,2vw,22px)",color:"var(--ink-3)",fontWeight:400}}>desde</span>
+                <span style={{fontFamily:"var(--f-display)",fontSize:"clamp(36px,5vw,56px)",letterSpacing:"-0.02em",lineHeight:1}}>{current.desdePrice}</span>
+                <span style={{fontFamily:"var(--f-mono)",fontSize:11,color:"var(--ink-3)"}}>MXN / mes</span>
               </div>
-              <div className="price-card-items">
-                {plan.items.map((item,j) => (
-                  <div key={j} className="price-card-item">
-                    <span style={{color:"var(--accent)",flexShrink:0}}>✓</span> {item}
-                  </div>
-                ))}
-              </div>
-              <Link to="/contacto" className="btn" style={{marginTop:"auto",justifyContent:"center",textAlign:"center"}}>
-                Contratar <span className="arrow"><Arrow size={12} rot={-45}/></span>
+              <p style={{fontSize:15,color:"var(--ink-2)",lineHeight:1.6}}>{current.desdeDesc}</p>
+            </div>
+            <div style={{borderTop:"1px solid var(--line)",paddingTop:20,display:"flex",gap:12,flexWrap:"wrap"}}>
+              <Link to="/contacto" className="btn btn--accent" style={{justifyContent:"center"}}>
+                Quiero información <span className="arrow"><Arrow size={12} rot={-45}/></span>
+              </Link>
+              <Link to="/precios" className="btn btn--ghost" style={{justifyContent:"center"}}>
+                Ver todos los planes <span className="arrow"><Arrow size={12} rot={0}/></span>
               </Link>
             </div>
-          ))}
-        </div>
-
-        {current.note && (
-          <p style={{marginTop:24,fontSize:11,color:"var(--ink-3)",fontFamily:"var(--f-mono)",letterSpacing:".06em",lineHeight:1.6}} className="reveal">
-            * {current.note}
-          </p>
+            {current.note && (
+              <p style={{fontSize:11,color:"var(--ink-3)",fontFamily:"var(--f-mono)",letterSpacing:".06em",lineHeight:1.6,margin:0}}>* {current.note}</p>
+            )}
+          </div>
+        ) : (
+          <>
+            <div className="prices-home-grid">
+              {current.planes.map((plan,i) => (
+                <div key={i} className={`price-card ${plan.highlight?"price-card--highlight":""}`}>
+                  {plan.highlight && <div className="price-card-badge">Más popular</div>}
+                  <div>
+                    <div className="price-card-name">{plan.name}</div>
+                    {plan.sub && <div style={{fontFamily:"var(--f-mono)",fontSize:10,color:"var(--ink-3)",letterSpacing:".06em",marginBottom:8}}>{plan.sub}</div>}
+                  </div>
+                  <div className="price-card-amount">
+                    {plan.price}
+                    <span className="price-card-period">MXN / {plan.period}</span>
+                  </div>
+                  <div className="price-card-items">
+                    {plan.items.map((item,j) => (
+                      <div key={j} className="price-card-item">
+                        <span style={{color:"var(--accent)",flexShrink:0}}>✓</span> {item}
+                      </div>
+                    ))}
+                  </div>
+                  <Link to={plan.name === "Órbita" ? "/ejemplos" : "/contacto"} className="btn" style={{marginTop:"auto",justifyContent:"center",textAlign:"center"}}>
+                    {plan.name === "Órbita" ? "Ver ejemplos" : "Contratar"} <span className="arrow"><Arrow size={12} rot={-45}/></span>
+                  </Link>
+                </div>
+              ))}
+            </div>
+            {current.note && (
+              <p style={{marginTop:24,fontSize:11,color:"var(--ink-3)",fontFamily:"var(--f-mono)",letterSpacing:".06em",lineHeight:1.6}} className="reveal">* {current.note}</p>
+            )}
+          </>
         )}
 
         <div style={{textAlign:"center",marginTop:32}} className="reveal">
-          <Link to="/precios" className="btn btn--ghost">
-            Ver todos los paquetes <span className="arrow"><Arrow size={12} rot={-45}/></span>
-          </Link>
+          <Link to="/precios" className="btn btn--ghost">Ver todos los paquetes <span className="arrow"><Arrow size={12} rot={-45}/></span></Link>
         </div>
       </div>
     </section>
@@ -178,17 +198,16 @@ export default function Home() {
     <>
       <NavBar />
       <main id="top">
-        {/* HERO */}
         <section className="hero-a">
           <div className="starfield" />
           <div className="halo halo-1" />
           <div className="container hero-a-inner">
-            <span className="eyebrow reveal">Agencia de marketing digital · MX · Somos espaciales ⚡</span>
+            <span className="eyebrow reveal">Agencia de marketing digital · MX · Somos espaciales ⚡ · Pet friendly 🐾</span>
             <h1 className="display reveal">Consultoría de marketing<br/>digital, <em>a fondo</em>.</h1>
             <p className="hero-a-sub reveal">Estudio creativo independiente que desarrolla marcas y marketing para negocios que cuentan una historia. Entramos como socios: diagnosticamos, diseñamos la estrategia y la ejecutamos contigo.</p>
             <div className="hero-a-cta reveal">
               <Link to="/contacto" className="btn">Iniciar un proyecto <span className="arrow"><Arrow size={12} rot={-45} /></span></Link>
-              <a href="#trabajo" className="btn btn--ghost">Ver trabajo <span className="arrow"><Arrow size={12} rot={0} /></span></a>
+              <Link to="/trabajo" className="btn btn--ghost">Ver trabajo <span className="arrow"><Arrow size={12} rot={0} /></span></Link>
             </div>
             <div className="orbital reveal">
               <div className="orbital-core" />
@@ -201,13 +220,12 @@ export default function Home() {
             </div>
             <div className="hero-a-meta reveal">
               <div><div style={{color:"var(--ink-2)",marginBottom:6}}>// 001 / Tesis</div>La consultoría que sí baja a ejecución.</div>
-              <div style={{textAlign:"center"}}><div style={{color:"var(--ink-2)",marginBottom:6}}>// 002 / Disponibilidad</div>Aceptando 2 engagements · Q3 2026</div>
+              <div style={{textAlign:"center"}}><div style={{color:"var(--ink-2)",marginBottom:6}}>// 002 / Disponibilidad</div>Recibiendo proyectos · Q3 2026</div>
               <div style={{textAlign:"right"}}><div style={{color:"var(--ink-2)",marginBottom:6}}>// 003 / Coordenadas</div>Monterrey · Quintana Roo · Baja California</div>
             </div>
           </div>
         </section>
 
-        {/* LOGOS */}
         <section style={{padding:0}}>
           <div className="logos">
             <div className="logos-marquee">
@@ -223,7 +241,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* PROBLEMAS */}
         <section id="problemas">
           <div className="container">
             <div className="section-head reveal">
@@ -242,7 +259,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* SERVICIOS */}
         <section id="servicios">
           <div className="container">
             <div className="section-head reveal">
@@ -268,12 +284,11 @@ export default function Home() {
           </div>
         </section>
 
-        {/* VERTICALES */}
         <section id="verticales">
           <div className="container">
             <div className="section-head reveal">
               <div><span className="eyebrow">Industrias que conocemos</span><h2 className="section-title">8 verticales,<br/>una <em>tesis</em> por cada una.</h2></div>
-              <p className="section-lead">No somos generalistas. Hemos construido playbooks específicos para los sectores donde más hemos trabajado.</p>
+              <p className="section-lead">No somos generalistas. Hemos construido experiencia específica para los sectores donde más hemos trabajado.</p>
             </div>
             <div className="verticals reveal">
               {VERTICALS.map(v => (
@@ -287,10 +302,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* PRECIOS */}
         <PreciosHome />
 
-        {/* PROCESO */}
         <section id="proceso">
           <div className="container" style={{marginBottom:64}}>
             <div className="section-head reveal">
@@ -308,7 +321,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* CASOS */}
         <section id="trabajo" className="cases">
           <div className="container">
             <div className="section-head reveal">
@@ -320,9 +332,9 @@ export default function Home() {
                 {CASES.map((c,i) => (
                   <article className="case" key={i}>
                     {c.img
-  ? <img src={c.img} alt={c.title} style={{width:"100%",aspectRatio:"4/3",objectFit:"cover",borderRadius:"var(--r-md)",display:"block"}} />
-  : <ImageSlot placeholder={`${c.title} — 1200×900`} style={{width:"100%",aspectRatio:"4/3"}} />
-}
+                      ? <img src={c.img} alt={c.title} style={{width:"100%",aspectRatio:"4/3",objectFit:"cover",borderRadius:"var(--r-md)",display:"block"}} />
+                      : <ImageSlot placeholder={`${c.title} — 1200x900`} style={{width:"100%",aspectRatio:"4/3"}} />
+                    }
                     <div className="case-meta"><span>{c.tag}</span><span>{c.year}</span></div>
                     <h3 className="case-title">{c.title}</h3>
                     <p className="case-desc">{c.desc}</p>
@@ -345,7 +357,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* TESTIMONIOS */}
         <section>
           <div className="container">
             <div className="section-head reveal">

@@ -24,7 +24,7 @@ export default function Popup() {
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { setError('Revisa el formato del correo.'); return }
     setLoading(true); setError('')
     const ok = await sendToSysteme({ email, firstName: name, tags: ['popup-nebula-2026', 'sitio-web-nebula-2026'] })
-    if (ok) { setSent(true); setTimeout(() => dismiss(), 3000) }
+if (ok) { setSent(true); setTimeout(() => { dismiss(); window.location.href = 'https://www.promo.nebulaestudio.com.mx/descarga-guia-google' }, 0) }
     else setError('Error de conexión, intenta de nuevo.')
     setLoading(false)
   }
