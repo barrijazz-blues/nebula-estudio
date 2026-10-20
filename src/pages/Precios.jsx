@@ -4,7 +4,7 @@ import { PageShell, PageHero } from '../components/chrome.jsx'
 import { Arrow } from '../components/atoms.jsx'
 import { CTA } from '../components/CTA.jsx'
 
-const PAQUETES = {
+export const PAQUETES = {
   web: {
     label: "Página Web",
     tagline: "Tu sitio web, listo para traer clientes.",

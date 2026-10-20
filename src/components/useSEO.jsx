@@ -5,8 +5,8 @@ const DOMAIN = 'https://nebulaestudio.com.mx'
 
 const SEO_DATA = {
   '/': {
-    title: 'Nebula Estudio — Marketing digital con criterio | MTY · Tulum · Ensenada',
-    description: 'Consultoría de marketing digital independiente. Branding, páginas web, Google Ads, Meta Ads y SEO. Diagnóstico, estrategia y ejecución. MTY · Tulum · BC.',
+    title: 'Nebula Estudio — Agencia de Marketing Digital en Monterrey, Tulum y Ensenada',
+    description: 'Nebula Estudio (Nebula Studio): páginas web, Google Ads, Meta Ads, redes sociales, branding y SEO para negocios en México. Llamada de diagnóstico sin costo; respondemos en menos de 24 horas.',
     og_image: `${DOMAIN}/og-home.jpg`,
   },
   '/servicios': {
@@ -31,7 +31,7 @@ const SEO_DATA = {
   },
   '/precios': {
     title: 'Precios y Paquetes — Nebula Estudio | Web, Social Media y Campañas',
-    description: 'Paquetes de página web desde $1,499, social media desde $3,500/mes y campañas digitales desde $2,800/mes. Sin letras chicas. Precios más IVA.',
+    description: 'Paquetes de página web desde $3,499, social media desde $3,500/mes y campañas digitales desde $2,800/mes. Sin letras chicas. Precios más IVA.',
     og_image: `${DOMAIN}/og-precios.jpg`,
   },
   '/contacto': {
@@ -45,11 +45,19 @@ export default function useSEO() {
   const { pathname } = useLocation()
 
   useEffect(() => {
-    const data = SEO_DATA[pathname] || SEO_DATA['/']
+    if (pathname.startsWith('/lp/')) return // las landings de campaña manejan su propio SEO
     const canonical = `${DOMAIN}${pathname}`
+    // Blog, ciudades y demás páginas ponen su propio título y descripción (su efecto corre antes
+    // que este). Aquí solo los respetamos y copiamos a Open Graph; no los pisamos con los del inicio.
+    const propio = SEO_DATA[pathname]
+    const data = propio || {
+      title: document.title,
+      description: document.querySelector('meta[name="description"]')?.getAttribute('content') || SEO_DATA['/'].description,
+      og_image: SEO_DATA['/'].og_image,
+    }
 
     // Title
-    document.title = data.title
+    if (propio) document.title = data.title
 
     // Helper
     const setMeta = (selector, attr, value) => {

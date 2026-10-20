@@ -6,8 +6,11 @@ import ImageSlot from '../components/ImageSlot.jsx'
 const WORK = [
   { slug:"nevana", title:"Nevana Tulum", tag:"Hotel · Tulum", year:"2026", filters:["branding","web"], span:8, ar:"16/10", img:"/trabajo-nevana.jpg" },
   { slug:"pocna",      title:"Pocna Tulum",        tag:"Hotel · Tulum",        year:"2024", filters:["web"],               span:4, ar:"4/5",   img:"/trabajo-pocna.png" },
+  { slug:"solcaribe",  title:"Sol Caribe",          tag:"Cabañas y restaurante", year:"2025", filters:["web"],               span:6, ar:"16/10", img:"/web-solcaribe.jpg" },
+  { slug:"yemaya",     title:"Yemaya Reefs",        tag:"Hotel · Little Corn Island", year:"2026", filters:["web"],          span:6, ar:"16/10", img:"/web-yemaya.jpg" },
+  { slug:"gahnos",     title:"Gahnos",              tag:"Transporte · Nuevo León", year:"2026", filters:["web"],             span:6, ar:"16/10", img:"/web-gahnos.jpg" },
+  { slug:"cabal",      title:"Centro Cabal",        tag:"Desarrollo juvenil · MTY", year:"2026", filters:["web"],            span:6, ar:"16/10", img:"/web-cabal.jpg" },
   { slug:"yucannabis", title:"Yucannabis",          tag:"CBD · Quintana Roo",   year:"2024", filters:["branding"],          span:4, ar:"4/5",   img:"/trabajo-yucannabis.png" },
-  { slug:"fs-brokers", title:"FS Brokers",          tag:"Inmobiliaria · SPGG",  year:"2024", filters:["branding","web"],    span:8, ar:"16/10", img:"/trabajo-fs-brookers.png" },
   { slug:"ilaria",     title:"Ilaria Lisi",         tag:"Wellness · Tulum",     year:"2024", filters:["branding"],          span:6, ar:"4/3",   img:"/trabajo-ilaria.png" },
   { slug:"pacific",    title:"Pacific Best Berry",  tag:"Distribución · BC",    year:"2024", filters:["web","performance"], span:6, ar:"4/3",   img:"/trabajo-pacific.png" },
   { slug:"eatbar",     title:"EatBar",              tag:"Restaurante · MTY",    year:"2023", filters:["branding","social"], span:4, ar:"4/5",   img:"/trabajo-eatbar.jpg" },

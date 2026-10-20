@@ -9,6 +9,7 @@ export default function Contacto() {
   const [services, setServices] = React.useState([])
   const [sent, setSent] = React.useState(false)
   const [loading, setLoading] = React.useState(false)
+  const [error, setError] = React.useState('')
   const [formData, setFormData] = React.useState({ nombre:"", empresa:"", email:"", telefono:"", proyecto:"", fuente:"" })
 
   const toggle = s => setServices(cur => cur.includes(s) ? cur.filter(x=>x!==s) : [...cur,s])
@@ -17,18 +18,23 @@ export default function Contacto() {
 const submit = async (e) => {
   e.preventDefault()
   setLoading(true)
-  await sendToSysteme({
-    email: formData.email,
-    firstName: formData.nombre,
-    tags: ["contacto-web-nebula-2026", ...services.map(s=>`interes-${s.toLowerCase().replace(/\s+/g,'-')}`)],
-    empresa: formData.empresa,
-    telefono: formData.telefono,
-    proyecto: formData.proyecto,
-    budget: budget,
-    servicios: services,
-    fuente: formData.fuente,
-  })
-  setSent(true)
+  setError('')
+  try {
+    const ok = await sendToSysteme({
+      email: formData.email,
+      firstName: formData.nombre,
+      tags: ["contacto-web-nebula-2026", ...services.map(s=>`interes-${s.toLowerCase().replace(/\s+/g,'-')}`)],
+      empresa: formData.empresa,
+      telefono: formData.telefono,
+      proyecto: formData.proyecto,
+      servicios: services,
+      fuente: formData.fuente,
+    })
+    if (ok) setSent(true)
+    else setError('No se pudo enviar, intenta de nuevo o escríbenos por WhatsApp.')
+  } catch {
+    setError('No se pudo enviar, intenta de nuevo o escríbenos por WhatsApp.')
+  }
   setLoading(false)
 }
 
@@ -74,10 +80,10 @@ const submit = async (e) => {
                 </select>
               </div>
               <div style={{marginTop:16,display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:16}}>
-                <span style={{fontFamily:"var(--f-mono)",fontSize:11,letterSpacing:".1em",textTransform:"uppercase",color:"var(--ink-3)"}}>
-                  {sent ? "// Mensaje recibido, te escribimos en breve." : "// Respondemos en < 24 h hábiles"}
+                <span style={{fontFamily:"var(--f-mono)",fontSize:11,letterSpacing:".1em",textTransform:"uppercase",color: error ? "oklch(0.65 0.18 30)" : "var(--ink-3)"}}>
+                  {error ? error : sent ? "// Mensaje recibido, te escribimos en breve." : "// Respondemos en < 24 h hábiles"}
                 </span>
-                <button type="submit" className="btn" disabled={loading}>
+                <button type="submit" className="btn" disabled={loading || sent}>
                   {sent?"Enviado ✓":loading?"Enviando...":"Enviar mensaje"} <span className="arrow"><Arrow size={12} rot={-45}/></span>
                 </button>
               </div>

@@ -13,8 +13,19 @@ export default function Popup() {
   React.useEffect(() => {
     const dismissed = sessionStorage.getItem('nebula-popup-dismissed')
     if (dismissed) return
-    const timer = setTimeout(() => setShow(true), 8000)
-    return () => clearTimeout(timer)
+
+    const onScroll = () => {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight
+      if (scrollable <= 0) return
+      const depth = window.scrollY / scrollable
+      if (depth >= 0.3) {
+        setShow(true)
+        window.removeEventListener('scroll', onScroll)
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   const dismiss = () => { setShow(false); sessionStorage.setItem('nebula-popup-dismissed', '1') }

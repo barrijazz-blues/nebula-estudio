@@ -16,6 +16,7 @@ import LandingEjemplos from './pages/LandingEjemplos.jsx'
 import NotFound from './pages/NotFound.jsx'
 import LandingCiudad, { CIUDADES } from './pages/LandingCiudad.jsx'
 import BlogPost from './pages/BlogPost.jsx'
+import LandingServicio from './pages/LandingServicio.jsx'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -26,6 +27,8 @@ function ScrollToTop() {
 export default function App() {
   useAccent()
   useSEO()
+  const { pathname } = useLocation()
+  const esCampana = pathname.startsWith('/lp/')
   return (
     <>
       <ScrollToTop />
@@ -39,6 +42,7 @@ export default function App() {
         <Route path="/precios" element={<Precios />} />
         <Route path="/landing" element={<Landing />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
+        <Route path="/lp/:slug" element={<LandingServicio />} />
         <Route path="/ejemplos" element={<LandingEjemplos />} />
         
 <Route path="/monterrey"         element={<LandingCiudad ciudad={CIUDADES.monterrey}          />} />
@@ -56,8 +60,8 @@ export default function App() {
 
  <Route path="*" element={<NotFound />} />
       </Routes>
-      <WhatsApp />
-      <Popup />
+      {!esCampana && <WhatsApp />}
+      {!esCampana && <Popup />}
     </>
   )
 }

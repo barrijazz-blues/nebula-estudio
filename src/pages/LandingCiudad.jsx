@@ -63,9 +63,9 @@ export const CIUDADES = {
     waMain: 'Hola%2C%20quiero%20cotizaci%C3%B3n%20para%20mi%20negocio%20en%20Tulum',
     waDiag: 'Diagn%C3%B3stico%20gratuito%20%E2%80%94%20Tulum',
     waTag: 'Tulum',
-    metaTitle: 'Agencia Digital en Tulum | Marketing para Negocios Turísticos | Nebula Estudio',
-    metaDescription: 'Diseño web y marketing para hoteles boutique, restaurantes y experiencias en Tulum.',
-    metaKeywords: 'agencia digital Tulum, diseño web Tulum, marketing hoteles Tulum',
+    metaTitle: 'Agencia de Marketing en Tulum | Diseño Web y Campañas | Nebula Estudio',
+    metaDescription: 'Agencia de marketing digital en Tulum para hoteles boutique, restaurantes y experiencias: páginas web, Google Ads, redes sociales y SEO. Llamada de diagnóstico sin costo.',
+    metaKeywords: 'agencia de marketing Tulum, agencia digital Tulum, diseño web Tulum, marketing hoteles Tulum',
   },
   'playa-del-carmen': {
     slug: 'playa-del-carmen', label: 'Playa del Carmen, QR',
@@ -289,7 +289,7 @@ export default function LandingCiudad({ ciudad: c }) {
     document.title = c.metaTitle
     document.querySelector('meta[name="description"]')?.setAttribute('content', c.metaDescription)
     document.querySelector('meta[name="keywords"]')?.setAttribute('content', c.metaKeywords)
-    document.querySelector('link[rel="canonical"]')?.setAttribute('href', `https://nebulasestudio.com.mx/${c.slug}`)
+    document.querySelector('link[rel="canonical"]')?.setAttribute('href', `https://nebulaestudio.com.mx/${c.slug}`)
     if (c.lang) document.documentElement.lang = c.lang
   }, [c])
 

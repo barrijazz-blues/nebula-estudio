@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Calculadora de Crecimiento — Nebula Estudio</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:oklch(0.985 0.005 85);--bg-2:oklch(0.965 0.008 85);--card:#fff;
+  --ink:oklch(0.18 0.01 280);--ink-2:oklch(0.32 0.01 280);--ink-3:oklch(0.52 0.012 280);
+  --line:oklch(0.88 0.01 280);--line-2:oklch(0.93 0.008 280);
+  --accent:oklch(0.55 0.22 295);--accent-soft:oklch(0.94 0.04 295);
+  --good:oklch(0.55 0.14 155);--bad:oklch(0.56 0.19 25);--amber:oklch(0.72 0.14 70);
+  --f-display:"Instrument Serif","Times New Roman",serif;
+  --f-sans:"Inter Tight",system-ui,-apple-system,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:var(--f-sans);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;font-size:15px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 20px 64px}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:.06em;font-size:12px;text-transform:uppercase;color:var(--ink-2)}
+.brand-dot{width:28px;height:28px;border-radius:50%;background:var(--ink);display:grid;place-items:center;color:var(--bg);font-family:var(--f-display);font-size:16px;letter-spacing:0;text-transform:none}
+h1{font-family:var(--f-display);font-weight:400;font-size:clamp(34px,5vw,54px);line-height:1.02;margin:0 0 6px;letter-spacing:-.01em}
+h1 em{color:var(--accent)}
+.lede{color:var(--ink-3);margin:0;max-width:640px}
+.btn{font:inherit;font-weight:500;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:10px 16px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.btn:hover{border-color:var(--ink-3)}
+.btn.dark{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tabs{display:inline-flex;background:var(--bg-2);border:1px solid var(--line-2);border-radius:999px;padding:4px;margin:22px 0 22px;gap:4px;flex-wrap:wrap}
+.tab{font:inherit;font-weight:500;border:0;background:transparent;color:var(--ink-3);padding:9px 18px;border-radius:999px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.panel{display:none}.panel.on{display:block}
+.grid{display:grid;grid-template-columns:340px 1fr;gap:20px;align-items:start}
+.grid>*{min-width:0}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+@media (max-width:560px){.tabs{display:flex;width:100%}.tab{flex:1;padding:9px 8px;font-size:14px}.kpi .v{font-size:24px}.card{padding:18px}}
+.card{background:var(--card);border:1px solid var(--line-2);border-radius:18px;padding:22px}
+.card h2{font-family:var(--f-display);font-weight:400;font-size:26px;margin:0 0 4px}
+.card .sub{color:var(--ink-3);font-size:13px;margin:0 0 18px}
+.field{margin-bottom:16px}
+.field label{display:block;font-weight:500;font-size:13.5px;margin-bottom:6px}
+.inp{display:flex;align-items:center;border:1px solid var(--line);border-radius:12px;background:var(--bg);padding:0 12px;transition:border-color .15s}
+.inp:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.inp span{color:var(--ink-3);font-family:var(--f-mono);font-size:13px}
+.inp input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-family:var(--f-mono);font-size:15px;padding:11px 8px;color:var(--ink);outline:none}
+.help{font-size:12px;color:var(--ink-3);margin-top:5px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+@media (max-width:700px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:var(--card);border:1px solid var(--line-2);border-radius:16px;padding:16px}
+.kpi .k{font-size:12px;color:var(--ink-3);font-weight:500}
+.kpi .v{font-family:var(--f-display);font-size:30px;line-height:1.1;margin-top:4px;font-variant-numeric:tabular-nums}
+.kpi.hero{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.kpi.hero .k{color:oklch(0.8 0.01 280)}
+.v.good{color:var(--good)}.v.bad{color:var(--bad)}
+.kpi.hero .v{color:#fff}
+.progress{height:8px;background:var(--bg-2);border-radius:99px;overflow:hidden;margin-top:10px}
+.progress i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .3s}
+.chart-card{margin-bottom:20px}
+.chart-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--ink-3)}
+.legend b{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+svg{display:block;width:100%;height:auto;overflow:visible}
+svg text{font-family:var(--f-sans);font-size:11px;fill:var(--ink-3)}
+.summary{background:var(--accent-soft);border:1px solid oklch(0.88 0.06 295);border-radius:16px;padding:18px 20px;margin-bottom:20px}
+.summary h3{margin:0 0 6px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.summary p{margin:0;color:var(--ink-2)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media (max-width:700px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{border:1px solid var(--line-2);border-radius:14px;padding:12px 14px;background:var(--card)}
+.stat .k{font-size:12px;color:var(--ink-3)}.stat .v{font-weight:600;font-variant-numeric:tabular-nums;font-size:17px}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:13.5px}
+.tbl-wrap{overflow-x:auto}
+th,td{padding:9px 10px;text-align:right;border-bottom:1px solid var(--line-2);white-space:nowrap}
+th{font-weight:500;color:var(--ink-3);font-size:12px}
+th:first-child,td:first-child{text-align:left}
+tr.be td{background:oklch(0.96 0.05 155)}
+.tag{display:inline-block;font-size:10.5px;font-weight:600;background:var(--good);color:#fff;border-radius:99px;padding:1px 7px;margin-left:6px;vertical-align:1px}
+.neg{color:var(--bad)}.pos{color:var(--good)}
+.note{font-size:12px;color:var(--ink-3);margin-top:22px;border-top:1px solid var(--line-2);padding-top:14px}
+.print-only{display:none}
+@media print{
+  body{background:#fff;font-size:12px}
+  .no-print,.tabs{display:none!important}
+  .panel{display:block!important;page-break-after:always}
+  .print-only{display:block}
+  .card,.kpi,.stat,.summary{break-inside:avoid}
+  .grid{grid-template-columns:260px 1fr}
+  .wrap{padding:0}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><div class="brand-dot">n</div>Nebula Estudio · Herramienta interna</div>
+    <div class="no-print" style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn" id="reset">Restablecer</button>
+      <button class="btn dark" onclick="window.print()">Descargar PDF</button>
+    </div>
+  </header>
+
+  <h1>Calculadora de <em>crecimiento</em></h1>
+  <p class="lede">Calcula cuántos prospectos necesita un negocio para llegar a su meta y cuánto le regresa su inversión en marketing a 12 meses.</p>
+  <p class="print-only" id="print-client" style="margin-top:8px"></p>
+
+  <div class="field no-print" style="max-width:340px;margin-top:20px">
+    <label for="cliente">Cliente / negocio (opcional, sale en el PDF)</label>
+    <div class="inp"><input id="cliente" type="text" placeholder="Ej. Consultorio Dental Ruiz" style="font-family:var(--f-sans)"></div>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" data-tab="meta">Meta de ingresos</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="roi">Retorno de inversión</button>
+  </div>
+
+  <!-- ============ META DE INGRESOS ============ -->
+  <section class="panel on" id="p-meta">
+    <div class="grid">
+      <div class="card">
+        <h2>Datos del negocio</h2>
+        <p class="sub">Lo que factura hoy y a dónde quiere llegar.</p>
+        <div class="field"><label for="m-actual">Ingreso anual actual</label>
+          <div class="inp"><span>$</span><input id="m-actual" type="number" min="0" step="10000" value="1200000"><span>MXN</span></div></div>
+        <div class="field"><label for="m-meta">Meta de ingreso anual</label>
+          <div class="inp"><span>$</span><input id="m-meta" type="number" min="0" step="10000" value="1800000"><span>MXN</span></div></div>
+        <div class="field"><label for="m-ticket">Ticket promedio por venta</label>
+          <div class="inp"><span>$</span><input id="m-ticket" type="number" min="1" step="100" value="2500"><span>MXN</span></div>
+          <div class="help">Lo que deja en promedio cada cliente o servicio vendido.</div></div>
+        <div class="field"><label for="m-cierre">Tasa de cierre</label>
+          <div class="inp"><input id="m-cierre" type="number" min="1" max="100" step="1" value="30"><span>%</span></div>
+          <div class="help">De cada 100 prospectos que preguntan, cuántos compran.</div></div>
+        <div class="field"><label for="m-cpl">Costo por prospecto (estimado)</label>
+          <div class="inp"><span>$</span><input id="m-cpl" type="number" min="0" step="10" value="250"><span>MXN</span></div>
+          <div class="help">Supuesto para calcular cuánto invertir en anuncios. Ajústalo con datos reales cuando los tengas.</div></div>
+      </div>
+
+      <div>
+        <div class="kpis">
+          <div class="kpi hero"><div class="k">Prospectos al mes</div><div class="v" id="o-leads">–</div></div>
+          <div class="kpi"><div class="k">Ventas extra al mes</div><div class="v" id="o-ventas">–</div></div>
+          <div class="kpi"><div class="k">Brecha mensual</div><div class="v" id="o-brecha">–</div></div>
+          <div class="kpi"><div class="k">Avance a la meta</div><div class="v" id="o-avance">–</div><div class="progress"><i id="o-bar"></i></div></div>
+        </div>
+
+        <div class="card chart-card">
+          <div class="chart-head">
+            <div><h2>Trayectoria a 12 meses</h2><p class="sub" style="margin:0">Ingreso mensual subiendo de forma gradual hasta la meta.</p></div>
+            <div class="legend"><span><b style="background:var(--accent)"></b>Ingreso mensual</span><span><b style="background:oklch(0.82 0.08 295)"></b>Prospectos necesarios</span></div>
+          </div>
+          <div id="chart-meta"></div>
+        </div>
+
+        <div class="summary"><h3>Resumen</h3><p id="o-resumen"></p></div>
+
+        <div class="stats">
+          <div class="stat"><div class="k">Ingreso mensual hoy</div><div class="v" id="o-mhoy">–</div></div>
+          <div class="stat"><div class="k">Ingreso mensual meta</div><div class="v" id="o-mmeta">–</div></div>
+          <div class="stat"><div class="k">Anuncios sugeridos / mes</div><div class="v" id="o-ads">–</div></div>
+          <div class="stat"><div class="k">Costo por venta</div><div class="v" id="o-cpa">–</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ROI ============ -->
+  <section class="panel" id="p-roi">
+    <div class="grid">
+      <div class="card">
+        <h2>Inversión</h2>
+        <p class="sub">Lo que el cliente invierte cada mes con Nebula.</p>
+        <div class="field"><label for="r-fee">Honorario mensual de Nebula</label>
+          <div class="inp"><span>$</span><input id="r-fee" type="number" min="0" step="100" value="3800"><span>MXN</span></div>
+          <div class="help">Gestión de campañas, contenido, reportes.</div></div>
+        <div class="field"><label for="r-ads">Inversión mensual en anuncios</label>
+          <div class="inp"><span>$</span><input id="r-ads" type="number" min="0" step="500" value="5000"><span>MXN</span></div>
+          <div class="help">Lo que se paga directo a Google o Meta.</div></div>
+        <div class="field"><label for="r-mult">Multiplicador de ventas</label>
+          <div class="inp"><input id="r-mult" type="number" min="0" step="0.1" value="3"><span>x</span></div>
+          <div class="help">Ventas generadas por cada $1 en anuncios (3x = $3 de venta por $1). Es un supuesto: úsalo conservador.</div></div>
+        <div class="field"><label for="r-ramp">Meses de arranque</label>
+          <div class="inp"><input id="r-ramp" type="number" min="1" max="12" step="1" value="3"><span>meses</span></div>
+          <div class="help">Tiempo hasta que la campaña rinde al 100% (1 a 12).</div></div>
+        <div class="field"><label for="r-margen">Margen de ganancia del negocio</label>
+          <div class="inp"><input id="r-margen" type="number" min="1" max="100" step="1" value="100"><span>%</span></div>
+          <div class="help">Déjalo en 100% para comparar contra ventas brutas. Pon el margen real (ej. 40%) para ver la ganancia de verdad.</div></div>
+      </div>
+
+      <div>
+        <div class="kpis">
+          <div class="kpi hero"><div class="k">Recupera la inversión</div><div class="v" id="r-be">–</div></div>
+          <div class="kpi"><div class="k">Inversión 12 meses</div><div class="v" id="r-inv">–</div></div>
+          <div class="kpi"><div class="k" id="r-rev-k">Ventas 12 meses</div><div class="v" id="r-rev">–</div></div>
+          <div class="kpi"><div class="k">ROI 12 meses</div><div class="v" id="r-roi">–</div></div>
+        </div>
+
+        <div class="card chart-card">
+          <div class="chart-head">
+            <div><h2>Retorno a 12 meses</h2><p class="sub" style="margin:0">Inversión acumulada contra lo generado acumulado.</p></div>
+            <div class="legend"><span><b style="background:var(--bad)"></b>Inversión acumulada</span><span><b style="background:var(--good)"></b>Generado acumulado</span></div>
+          </div>
+          <div id="chart-roi"></div>
+        </div>
+
+        <div class="summary"><h3>Resumen</h3><p id="r-resumen"></p></div>
+
+        <div class="card">
+          <h2 style="font-size:22px;margin-bottom:12px">Desglose mensual</h2>
+          <div class="tbl-wrap"><table>
+            <thead><tr><th>Mes</th><th>Inversión</th><th id="th-gen">Generado</th><th>Utilidad</th><th>ROI mes</th><th>Utilidad acum.</th><th>ROI acum.</th></tr></thead>
+            <tbody id="r-tbody"></tbody>
+          </table></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <p class="note">Estimaciones con fines de planeación, no garantía de resultados. Los resultados reales dependen del mercado, la oferta, la atención a prospectos y la competencia. Montos en pesos mexicanos.</p>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const MXN = new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN',maximumFractionDigits:0});
+const NUM = new Intl.NumberFormat('es-MX',{maximumFractionDigits:0});
+const money = n => MXN.format(Math.round(n));
+const short = n => { const a=Math.abs(n); if(a>=1e6) return '$'+(n/1e6).toFixed(a>=1e7?0:1).replace('.0','')+'M'; if(a>=1e3) return '$'+Math.round(n/1e3)+'k'; return '$'+Math.round(n); };
+const pct = n => (n>0?'+':'')+n.toFixed(1)+'%';
+const MESES=['Mes 1','Mes 2','Mes 3','Mes 4','Mes 5','Mes 6','Mes 7','Mes 8','Mes 9','Mes 10','Mes 11','Mes 12'];
+const MCORTO=['1','2','3','4','5','6','7','8','9','10','11','12'];
+const val = id => { const v=parseFloat($(id).value); return isFinite(v)?v:0; };
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+
+/* ---------- SVG chart helper ---------- */
+function chart(el,{bars=[],lines=[],barColor,yFmt=short,y2Fmt,markerIdx=-1,markerLabel=''}){
+  const W=760,H=300,L=56,R=y2Fmt?44:14,T=14,B=30,iw=W-L-R,ih=H-T-B,n=12,step=iw/n;
+  const allL=lines.flatMap(l=>l.data);
+  let max=Math.max(1,...allL, ...(y2Fmt?[]:bars)); let min=Math.min(0,...allL);
+  const nice = v=>{const p=Math.pow(10,Math.floor(Math.log10(Math.abs(v)||1)));return Math.ceil(v/p/ (v/p>5?1:0.5))*p*(v/p>5?1:0.5);};
+  max=nice(max);
+  const y=v=>T+ih-(v-min)/(max-min)*ih;
+  const bmax=y2Fmt?Math.max(1,...bars)*1.15:max;
+  const yb=v=>T+ih-(v/bmax)*ih;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img">`;
+  for(let i=0;i<=4;i++){const v=min+(max-min)*i/4,yy=y(v);s+=`<line x1="${L}" x2="${W-R}" y1="${yy}" y2="${yy}" stroke="${css('--line-2')}"/><text x="${L-8}" y="${yy+4}" text-anchor="end">${yFmt(v)}</text>`;
+    if(y2Fmt){const v2=bmax*i/4;s+=`<text x="${W-R+8}" y="${T+ih-(i/4)*ih+4}">${y2Fmt(v2)}</text>`;}}
+  if(min<0){s+=`<line x1="${L}" x2="${W-R}" y1="${y(0)}" y2="${y(0)}" stroke="${css('--ink-3')}" stroke-dasharray="3 3"/>`;}
+  bars.forEach((v,i)=>{const bw=step*0.5,x=L+i*step+(step-bw)/2,top=yb(v);s+=`<rect x="${x}" y="${top}" width="${bw}" height="${Math.max(0,T+ih-top)}" rx="4" fill="${barColor}"/>`;});
+  if(markerIdx>=0){const x=L+markerIdx*step+step/2;s+=`<line x1="${x}" x2="${x}" y1="${T}" y2="${T+ih}" stroke="${css('--good')}" stroke-dasharray="4 4"/><text x="${x+6}" y="${T+10}" style="fill:${css('--good')};font-weight:600">${markerLabel}</text>`;}
+  lines.forEach(l=>{const pts=l.data.map((v,i)=>[L+i*step+step/2,y(v)]);
+    s+=`<polyline fill="none" stroke="${l.color}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" points="${pts.map(p=>p.join(',')).join(' ')}"/>`;
+    pts.forEach(p=>s+=`<circle cx="${p[0]}" cy="${p[1]}" r="3.5" fill="#fff" stroke="${l.color}" stroke-width="2"/>`);});
+  MCORTO.forEach((m,i)=>s+=`<text x="${L+i*step+step/2}" y="${H-8}" text-anchor="middle">${m}</text>`);
+  el.innerHTML=s+'</svg>';
+}
+
+/* ---------- Meta de ingresos ---------- */
+function calcMeta(){
+  const actual=val('m-actual'),meta=val('m-meta'),ticket=Math.max(1,val('m-ticket')),cierre=Math.min(100,Math.max(1,val('m-cierre')))/100,cpl=val('m-cpl');
+  const mHoy=actual/12,mMeta=meta/12,brecha=Math.max(0,mMeta-mHoy);
+  const ventas=Math.ceil(brecha/ticket);
+  const leads=Math.ceil(brecha/(ticket*cierre));
+  const avance=meta>0?Math.min(100,actual/meta*100):0;
+  $('o-leads').textContent=NUM.format(leads);
+  $('o-ventas').textContent=NUM.format(ventas);
+  $('o-brecha').textContent=short(brecha);
+  $('o-avance').textContent=avance.toFixed(0)+'%';
+  $('o-bar').style.width=avance+'%';
+  $('o-mhoy').textContent=money(mHoy);
+  $('o-mmeta').textContent=money(mMeta);
+  $('o-ads').textContent=cpl>0?money(leads*cpl):'—';
+  $('o-cpa').textContent=cpl>0?money(cpl/cierre):'—';
+  const rev=[],ld=[];
+  for(let i=0;i<12;i++){const f=(i+1)/12,mrev=mHoy+(mMeta-mHoy)*f;rev.push(mrev);ld.push(Math.ceil(Math.max(0,mrev-mHoy)/(ticket*cierre)));}
+  chart($('chart-meta'),{lines:[{data:rev,color:css('--accent')}],bars:ld,barColor:'oklch(0.86 0.07 295)',y2Fmt:v=>NUM.format(Math.round(v))});
+  const nombre=$('cliente').value.trim();
+  $('o-resumen').innerHTML = brecha<=0
+    ? `${nombre?nombre+' ya':'El negocio ya'} está en su meta o por encima. Sube la meta para ver cuántos prospectos necesita para crecer.`
+    : `Para pasar de <b>${money(actual)}</b> a <b>${money(meta)}</b> al año${nombre?', '+nombre:''} necesita <b>${NUM.format(leads)} prospectos nuevos al mes</b>. Con una tasa de cierre de ${(cierre*100).toFixed(0)}% y un ticket promedio de ${money(ticket)}, eso son unas <b>${NUM.format(ventas)} ventas extra al mes</b>${cpl>0?`, con una inversión en anuncios de alrededor de <b>${money(leads*cpl)}</b> al mes si cada prospecto cuesta ${money(cpl)}`:''}.`;
+}
+
+/* ---------- ROI ---------- */
+function calcRoi(){
+  const fee=val('r-fee'),ads=val('r-ads'),mult=val('r-mult'),ramp=Math.min(12,Math.max(1,Math.round(val('r-ramp')))),margen=Math.min(100,Math.max(1,val('r-margen')))/100;
+  const inv=fee+ads;let ci=0,cg=0,be=-1;const rows=[],cumI=[],cumG=[];
+  for(let m=1;m<=12;m++){
+    const gen=ads*mult*Math.min(m/ramp,1)*margen;
+    ci+=inv;cg+=gen;const ut=gen-inv,cut=cg-ci;
+    if(be<0&&cut>=0&&inv>0)be=m;
+    rows.push({m,inv,gen,ut,roi:inv?ut/inv*100:0,cut,croi:ci?cut/ci*100:0});
+    cumI.push(ci);cumG.push(cg);
+  }
+  const roi12=ci?(cg-ci)/ci*100:0;
+  const bruto=margen>=1;
+  $('r-rev-k').textContent=bruto?'Ventas 12 meses':'Ganancia 12 meses';
+  $('th-gen').textContent=bruto?'Ventas':'Ganancia';
+  $('r-be').textContent=be>0?'Mes '+be:'No en 12 m';
+  $('r-inv').textContent=short(ci);
+  $('r-rev').textContent=short(cg);
+  const rEl=$('r-roi');rEl.textContent=pct(roi12);rEl.className='v '+(roi12>=0?'good':'bad');
+  $('r-tbody').innerHTML=rows.map(r=>`<tr class="${r.m===be?'be':''}"><td>${MESES[r.m-1]}${r.m===be?'<span class="tag">Recupera</span>':''}</td><td>${money(r.inv)}</td><td>${money(r.gen)}</td><td class="${r.ut<0?'neg':'pos'}">${money(r.ut)}</td><td>${pct(r.roi)}</td><td class="${r.cut<0?'neg':'pos'}">${money(r.cut)}</td><td>${pct(r.croi)}</td></tr>`).join('');
+  chart($('chart-roi'),{lines:[{data:cumI,color:css('--bad')},{data:cumG,color:css('--good')}],markerIdx:be-1,markerLabel:be>0?'Recupera':''});
+  const nombre=$('cliente').value.trim(), que=bruto?'ventas':'ganancia';
+  $('r-resumen').innerHTML=`Con una inversión de <b>${money(inv)} al mes</b> (${money(fee)} de honorario + ${money(ads)} en anuncios) y un multiplicador de ${mult}x${bruto?'':` con margen de ${(margen*100).toFixed(0)}%`}, ${nombre||'el negocio'} ${be>0?`<b>recupera su inversión en el mes ${be}</b>`:'<b>no recupera la inversión en 12 meses</b> con estos supuestos'}. En un año invierte ${money(ci)} y genera ${money(cg)} en ${que}: ${roi12>=0?'utilidad neta de':'pérdida de'} <b>${money(Math.abs(cg-ci))}</b> y ROI de <b>${pct(roi12)}</b>.`;
+}
+
+/* ---------- UI ---------- */
+const DEF={};document.querySelectorAll('input').forEach(i=>DEF[i.id]=i.value);
+function all(){calcMeta();calcRoi();const c=$('cliente').value.trim();$('print-client').textContent=c?'Preparado para: '+c+' · '+new Date().toLocaleDateString('es-MX',{day:'numeric',month:'long',year:'numeric'}):'';}
+document.querySelectorAll('input').forEach(i=>i.addEventListener('input',all));
+$('reset').onclick=()=>{document.querySelectorAll('input').forEach(i=>i.value=DEF[i.id]);all();};
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',x===t));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on',p.id==='p-'+t.dataset.tab));
+});
+all();
+</script>
+</body>
+</html>

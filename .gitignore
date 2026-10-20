@@ -17,3 +17,8 @@ dist.zip
 # Logs
 *.log
 npm-debug.log*
+
+.deploy.env
+.env
+.htaccess-servidor-respaldo
+display-ads/

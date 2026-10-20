@@ -1,0 +1,40 @@
+# Nebula Estudio — reglas del servidor (SiteGround / Apache)
+# Este archivo vive en public/.htaccess y se sube con `npm run deploy`.
+
+Options -MultiViews
+DirectoryIndex index.html
+RewriteEngine On
+
+# 1) Forzar HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# 2) www → sin www
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+# 3) Nadie entra directo a /_pre/… ni /_shell.html (evita contenido duplicado)
+RewriteCond %{THE_REQUEST} \s/+_pre/(.+)\.html[\s?] [NC]
+RewriteRule ^ https://%{HTTP_HOST}/%1 [L,R=301]
+RewriteCond %{THE_REQUEST} \s/+_shell\.html[\s?] [NC]
+RewriteRule ^ https://%{HTTP_HOST}/ [L,R=301]
+
+# 4) Quitar la diagonal final (/servicios/ → /servicios)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)/$ https://%{HTTP_HOST}/$1 [L,R=301]
+
+# 5) Página pre-renderizada: /servicios → /_pre/servicios.html (sin cambiar la URL)
+RewriteCond %{DOCUMENT_ROOT}/_pre/$1.html -f
+RewriteRule ^(.+)$ /_pre/$1.html [L]
+
+# 6) Todo lo demás (rutas sin pre-render): la app de React
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ /_shell.html [L]
+
+# Que el navegador y el caché siempre revisen si hay una versión nueva del HTML
+<IfModule mod_headers.c>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>

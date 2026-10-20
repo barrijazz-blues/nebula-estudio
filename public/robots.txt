@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+# Copias internas del pre-render: Google debe usar las URLs normales (/servicios, /blog/05…)
+Disallow: /_pre/
+Disallow: /_shell.html
+Disallow: /calculadora/
 
 Sitemap: https://nebulaestudio.com.mx/sitemap.xml
